@@ -38,7 +38,7 @@ const FreelancerBanner = () => {
       buttons: true,
     });
   };
-  const categorydatahandle = (e) => {
+  const handleAddBanner = (e) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -53,14 +53,14 @@ const FreelancerBanner = () => {
     };
     axios
       .post(
-        `${process.env.REACT_APP_API_KEY}admin/api/admin_add_banner`,
+        `${process.env.REACT_APP_API_KEY}admin/api/add_freelancer_banner`,
         formData,
         options
       )
       .then((res) => {
         toast.success(res?.data?.msg || "Cetegory Add Successfully");
         addcategorydata();
-        getbannerlist();
+        getBannerList();
       })
       .catch((error) => {
         console.log(error);
@@ -71,25 +71,21 @@ const FreelancerBanner = () => {
   };
 
   useEffect(() => {
-    getbannerlist();
+    getBannerList();
   }, [0]);
 
-  let getbannerlist = () => {
-    const options = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
+  let getBannerList = () => {
     axios
-      .get(
-        `${process.env.REACT_APP_API_KEY}admin/api/admin_all_banner`,
-        options
-      )
+      .get(`${process.env.REACT_APP_API_KEY}admin/api/freelancer_all_banner`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((res) => {
         setcount(res?.data?.data?.length);
         setcategorylist(res.data.data);
       })
-      .catch((error) => { });
+      .catch((error) => {});
   };
 
   const handleFilter = (e) => {
@@ -108,10 +104,10 @@ const FreelancerBanner = () => {
   };
 
   let cetagoryedit = () => {
-    navigate("/updatebanner");
+    navigate("/updateFreelancerBanner");
   };
 
-  let deletesubcategory = (item) => {
+  let handleDeleteBanner = (item) => {
     swal({
       title: "Are you sure?",
       text: "Once deleted, you will not be able to recover this category!",
@@ -132,14 +128,14 @@ const FreelancerBanner = () => {
           };
           axios
             .post(
-              `${process.env.REACT_APP_API_KEY}admin/api/admin_delete_banner`,
+              `${process.env.REACT_APP_API_KEY}admin/api/freelancer_banner_delete`,
               bannerdata,
               options
             )
             .then((res) => {
-              getbannerlist();
+              getBannerList();
             })
-            .catch((error) => { });
+            .catch((error) => {});
         };
         deletebannerimage();
         swal("Poof! Your category  has been deleted!", {
@@ -167,9 +163,9 @@ const FreelancerBanner = () => {
       )
       .then((res) => {
         toast.success(res.data.message);
-        getbannerlist();
+        getBannerList();
       })
-      .catch((error) => { });
+      .catch((error) => {});
   };
 
   const renderCategoryData = (categorydata, index) => {
@@ -183,7 +179,8 @@ const FreelancerBanner = () => {
             onClick={() => {
               secureLocalStorage.setItem("customerid", categorydata?._id);
             }}
-            className="title-color hover-c1 d-flex align-items-center gap-10">
+            className="title-color hover-c1 d-flex align-items-center gap-10"
+          >
             {!categorydata?.image ? (
               <img
                 src="bussiness-man.png"
@@ -199,7 +196,6 @@ const FreelancerBanner = () => {
                 width={40}
               />
             )}
-
           </Link>
         </td>
         {/* <td>{categorydata?.maincategoryId?.mainname}</td> */}
@@ -250,19 +246,21 @@ const FreelancerBanner = () => {
                   secureLocalStorage.setItem("categoryid", categorydata?._id)
                 );
               }}
-              title="Edit">
+              title="Edit"
+            >
               <i className="fa fa-pencil-square-o" aria-hidden="true" />
             </span>
             <a
               onClick={() => {
-                deletesubcategory(categorydata?._id);
+                handleDeleteBanner(categorydata?._id);
               }}
               className="btn btn-outline-danger btn-sm cursor-pointer delete"
               title="Delete"
-              id={35}>
+              id={35}
+            >
               <i
                 className="fa fa-trash-o"
-                onClick={deletesubcategory}
+                onClick={handleDeleteBanner}
                 aria-hidden="true"
               />
             </a>
@@ -277,14 +275,16 @@ const FreelancerBanner = () => {
       {/* <Header /> */}
       <div
         className="container row"
-        style={{ paddingLeft: "0px", paddingRight: "0px", marginLeft: "0px" }}>
+        style={{ paddingLeft: "0px", paddingRight: "0px", marginLeft: "0px" }}
+      >
         <div className="col-lg-3 col-md-4" style={{ paddingLeft: "0px" }}>
           {/* <Sidebarr /> */}
         </div>
 
         <div
           className="col-lg-9 col-md-8"
-          style={{ paddingLeft: "0px", marginTop: "60px" }}>
+          style={{ paddingLeft: "0px", marginTop: "60px" }}
+        >
           <div className="mt-3">
             <div className="mb-3">
               <h2 className="h1 mb-0 d-flex gap-10">
@@ -292,20 +292,20 @@ const FreelancerBanner = () => {
                   src="https://6valley.6amtech.com/public/assets/back-end/img/brand-setup.png"
                   alt
                 />
-                Banner
+                Freelancer Banner
               </h2>
             </div>
             <div className="row">
               <div className="col-md-12">
                 <div className="card">
                   <div className="card-body" style={{ textAlign: "left" }}>
-                    <form onSubmit={categorydatahandle}>
+                    <form onSubmit={handleAddBanner}>
                       <div className="row">
                         <div className="col-lg-6">
                           <div>
                             <div className="form-group  lang_form">
                               <label className="title-color">
-                                Banner Title
+                              Freelancer Banner Title
                                 <span className="text-danger">*</span>
                               </label>
                               <input
@@ -316,7 +316,7 @@ const FreelancerBanner = () => {
                                 type="text"
                                 name="name[]"
                                 className="form-control"
-                                placeholder="New Banner"
+                                placeholder="New Freelancer Banner"
                                 required
                               />
                             </div>
@@ -344,7 +344,7 @@ const FreelancerBanner = () => {
                               )}
                             </center>
                             <label className="title-color mt-3">
-                              Banner Logo
+                            Freelancer Banner Logo
                             </label>
                             <span className="text-info">
                               <span className="text-danger">*</span>
@@ -363,7 +363,8 @@ const FreelancerBanner = () => {
 
                               <label
                                 className="custom-file-label"
-                                htmlFor="customFileEg1">
+                                htmlFor="customFileEg1"
+                              >
                                 Choose File
                               </label>
                             </div>
@@ -387,7 +388,7 @@ const FreelancerBanner = () => {
                     <div className="row align-items-center">
                       <div className="col-sm-4 col-md-6 col-lg-8 mb-2 mb-sm-0">
                         <h5 className="text-capitalize d-flex gap-1">
-                          Banner list
+                        Freelancer Banner list
                           <span className="badge badge-soft-dark radius-50 fz-12">
                             {count}
                           </span>
@@ -422,13 +423,14 @@ const FreelancerBanner = () => {
                     {filteredCategoryList.length > 0 ? (
                       <table
                         style={{ textAlign: "left" }}
-                        className="table table-hover table-borderless table-thead-bordered table-nowrap table-align-middle card-table w-100">
+                        className="table table-hover table-borderless table-thead-bordered table-nowrap table-align-middle card-table w-100"
+                      >
                         <thead className="thead-light thead-50 text-capitalize">
                           <tr>
                             <th>Sr.No</th>
                             <th className="text-center"> Image</th>
                             {/* <th>Main Category </th> */}
-                            <th>Banner Title </th>
+                            <th>Freelancer Banner Title </th>
                             <th> Date/Time </th>
                             <th className=""> Status</th>
                             <th className="text-center">Action</th>

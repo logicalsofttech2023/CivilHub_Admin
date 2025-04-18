@@ -13,7 +13,7 @@ const FreelancerSubCategory = () => {
     let navigate = useNavigate();
   
     let subcetagoryedit = () => {
-      navigate("/editsubcetagory");
+      navigate("/updateFreelancerSubCategory");
     };
   
     const [categoryId, setCategoryId] = useState();

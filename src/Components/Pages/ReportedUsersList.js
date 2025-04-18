@@ -8,7 +8,7 @@ import axios from "axios";
 import swal from "sweetalert";
 import Pagination from "react-js-pagination"; // Import the Pagination component
 
-const Individual = () => {
+const ReportedUsersList = () => {
   const [usersList, setUsersList] = useState([]);
   const [count, setCount] = useState();
 
@@ -59,19 +59,14 @@ const Individual = () => {
       })
       .then((res) => {
         console.log(res);
-        const allUsers = res?.data?.data || [];
-        const freelancerUsers = allUsers.filter(
-          (user) => user.account_type === "Individual"
-        );
-        setCount(freelancerUsers.length);
-        setUsersList(freelancerUsers);
-        setFilterUsersList(freelancerUsers);
+        setCount(res?.data?.data?.length);
+        setUsersList(res.data.data);
+        setFilterUsersList(res.data.data);
       })
       .catch((error) => {
         console.log("error", error);
       });
   };
-  
 
   const handleFilter = (event) => {
     const searchTerm = event.target.value.toLowerCase();
@@ -145,6 +140,7 @@ const Individual = () => {
               : customer.address
             : "N/A"}
         </td>
+        <td>{customer?.account_type || "N/A"}</td>
         <td>{customer?.experience || "0"} yr</td>
         <td>{customer?.total_projects_done || "0"}</td>
         <td>{customer?.rating || "0"}</td>
@@ -207,7 +203,7 @@ const Individual = () => {
                 src="https://6valley.6amtech.com/public/assets/back-end/img/customer.png"
                 alt=""
               />
-              Individual List
+              Reported Users List
               <span className="badge badge-soft-dark radius-50">{count}</span>
             </h2>
           </div>
@@ -251,6 +247,7 @@ const Individual = () => {
                       <th>Profile</th>
                       <th>Contact Info</th>
                       <th>Address</th>
+                      <th>Account Type</th>
                       <th>Experience</th>
                       <th>Projects</th>
                       <th>Rating</th>
@@ -303,4 +300,4 @@ const Individual = () => {
   );
 };
 
-export default Individual;
+export default ReportedUsersList;

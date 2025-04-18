@@ -19,7 +19,7 @@ const BusinessList = () => {
 
   let token = secureLocalStorage.getItem("adminidtoken");
 
-  let unblockcustomer = () => {
+  let BlockCustomer = () => {
     swal({
       title: "Customer Status Changed",
       icon: "success",
@@ -27,27 +27,23 @@ const BusinessList = () => {
   };
 
   let unblock = (item) => {
-    let unblockdata = {
-      userId: item,
-    };
-
-    let options = {
-      headers: {
-        token: token,
-      },
-    };
-
     axios
       .post(
-        `${process.env.REACT_APP_API_KEY}admin/api/userBlock_unblock_api`,
-        unblockdata,
-        options
+        `${process.env.REACT_APP_API_KEY}admin/api/user_account_block_unblock`,
+        { userID: item },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       )
       .then((res) => {
-        unblockcustomer();
+        BlockCustomer();
         getUsersList();
       })
-      .catch((error) => {});
+      .catch((error) => {
+        console.log("error", error);
+      });
   };
 
   useEffect(() => {
@@ -165,8 +161,8 @@ const BusinessList = () => {
         </td>
 
         <td>
-          <div onClick={() => unblock(customer.userId)} className="text-center">
-            {customer?.active_status === 1 ? (
+          <div onClick={() => unblock(customer._id)} className="text-center">
+            {customer?.block_status === 1 ? (
               <div className="btn btn-primary">Unblock</div>
             ) : (
               <div className="btn btn-danger">Block</div>

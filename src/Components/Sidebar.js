@@ -25,6 +25,8 @@ import { PiFlagBannerFill } from "react-icons/pi";
 import { IoChatboxEllipses } from "react-icons/io5";
 import { FaUser } from "react-icons/fa";
 import { MdOutlineBrandingWatermark } from "react-icons/md";
+import { FaToolbox } from "react-icons/fa";
+
 import { IoMdSettings } from "react-icons/io";
 const Sidebarr = (props) => {
   let navigate = useNavigate();
@@ -161,24 +163,6 @@ const Sidebarr = (props) => {
                           icon={<FaUser style={{ fontSize: "20px" }} />}
                         >
                           <MenuItem
-                            component={<Link to="/userList" />}
-                            icon={
-                              <i
-                                class="fa fa-circle"
-                                style={{ color: "white", fontSize: "5px" }}
-                                aria-hidden="true"
-                              ></i>
-                            }
-                            style={{
-                              paddingLeft: "20px",
-                              backgroundColor: "#073b74",
-                              color: "white",
-                              height: "32px",
-                            }}
-                          >
-                            Users List{" "}
-                          </MenuItem>
-                          <MenuItem
                             component={<Link to="/freelancerList" />}
                             icon={
                               <i
@@ -256,7 +240,61 @@ const Sidebarr = (props) => {
                             {" "}
                             Individual List
                           </MenuItem>
+
+                          <MenuItem
+                            component={<Link to="/reportedUsersList" />}
+                            icon={
+                              <i
+                                class="fa fa-circle"
+                                style={{ color: "white", fontSize: "5px" }}
+                                aria-hidden="true"
+                              ></i>
+                            }
+                            style={{
+                              paddingLeft: "20px",
+                              backgroundColor: "#073b74",
+                              color: "white",
+                              height: "32px",
+                            }}
+                          >
+                            Reported Users List{" "}
+                          </MenuItem>
+
+                          
+
+                          
                         </SubMenu>
+
+                        <SubMenu
+                            label="Job"
+                            style={{
+                              paddingLeft: "5px",
+                              backgroundColor: "#073b74",
+                              color: "white",
+                              height: "39px",
+                            }}
+                            icon={<FaToolbox style={{ fontSize: "20px" }} />}
+                          >
+                            <MenuItem
+                              component={<Link to="/jobList" />}
+                              icon={
+                                <i
+                                  class="fa fa-circle"
+                                  style={{ color: "white", fontSize: "5px" }}
+                                  aria-hidden="true"
+                                ></i>
+                              }
+                              style={{
+                                paddingLeft: "20px",
+                                backgroundColor: "#073b74",
+                                color: "white",
+                                height: "32px",
+                              }}
+                            >
+                              {" "}
+                              Job List
+                            </MenuItem>
+                          </SubMenu>
 
                         <MenuItem
                           style={{
@@ -421,7 +459,7 @@ const Sidebarr = (props) => {
                           </MenuItem>
 
                           <MenuItem
-                            component={<Link to="/banner" />}
+                            component={<Link to="/marketPlaceBanner" />}
                             icon={
                               <i
                                 class="fa fa-circle"
@@ -543,9 +581,6 @@ const Sidebarr = (props) => {
                           </MenuItem>
                         </SubMenu>
 
-                        
-
-                        
                         <MenuItem
                           style={{
                             paddingLeft: "13px",
@@ -555,10 +590,10 @@ const Sidebarr = (props) => {
                           }}
                         >
                           {" "}
-                          CHAT DETAILS{" "}
+                          SETTINGS{" "}
                         </MenuItem>
 
-                        <SubMenu
+                        {/* <SubMenu
                           label="Chat"
                           style={{
                             paddingLeft: "5px",
@@ -627,9 +662,7 @@ const Sidebarr = (props) => {
                             {" "}
                             Vendor Chat{" "}
                           </MenuItem>
-                        </SubMenu>
-
-                        
+                        </SubMenu> */}
 
                         <SubMenu
                           style={{
@@ -720,25 +753,7 @@ const Sidebarr = (props) => {
                             {" "}
                             Faq{" "}
                           </MenuItem>
-                          <MenuItem
-                            component={<Link to="/contactus" />}
-                            icon={
-                              <i
-                                class="fa fa-circle"
-                                style={{ color: "white", fontSize: "5px" }}
-                                aria-hidden="true"
-                              ></i>
-                            }
-                            style={{
-                              paddingLeft: "20px",
-                              backgroundColor: "#073b74",
-                              color: "white",
-                              height: "32px",
-                            }}
-                          >
-                            {" "}
-                            Contact us{" "}
-                          </MenuItem>
+                          
                         </SubMenu>
                       </Menu>
                     </Sidebar>

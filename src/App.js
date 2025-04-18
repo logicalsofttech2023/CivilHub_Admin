@@ -132,7 +132,6 @@ import Dealsoftoday from "./Components/page/Dealsoftoday";
 import Skilled from "./Components/page/Skilled";
 import Banner from "./Components/page/Banner";
 import Blog from "./Components/page/Blog";
-import Updatebanner from "./Components/page/Updatebanner";
 
 // New Routes
 import UserList from "./Components/Pages/UserList";
@@ -153,6 +152,11 @@ import UserDetails from "./Components/Pages/UserDetails";
 import UpdateFreelancerCategory from "./Components/Pages/UpdateFreelancerCategory";
 import UpdateJobCategory from "./Components/Pages/UpdateJobCategory";
 import UpdateSkill from "./Components/Pages/UpdateSkill";
+import UpdateFreelancerBanner from "./Components/Pages/UpdateFreelancerBanner";
+import UpdateMarketPlaceBanner from "./Components/Pages/UpdateMarketPlaceBanner";
+import ReportedUsersList from "./Components/Pages/ReportedUsersList";
+import JobList from "./Components/Pages/JobList";
+import UpdateFreelancerSubCategory from "./Components/Pages/UpdateFreelancerSubCategory";
 
 function App() {
   const [randomResult, setRandomResult] = useState("hello");
@@ -571,8 +575,8 @@ function App() {
         ></Route>
 
         <Route
-          path="/updatebanner"
-          element={<Protect ComponentName={Updatebanner} />}
+          path="/updateFreelancerBanner"
+          element={<Protect ComponentName={UpdateFreelancerBanner} />}
         ></Route>
 
         <Route
@@ -815,13 +819,33 @@ function App() {
         ></Route>
 
         <Route
+          path="/updateMarketPlaceBanner"
+          element={<Protect ComponentName={UpdateMarketPlaceBanner} />}
+        ></Route>
+
+        <Route
           path="/updateJobCategory"
           element={<Protect ComponentName={UpdateJobCategory} />}
         ></Route>
 
         <Route
+          path="/reportedUsersList"
+          element={<Protect ComponentName={ReportedUsersList} />}
+        ></Route>
+
+        <Route
+          path="/jobList"
+          element={<Protect ComponentName={JobList} />}
+        ></Route>
+
+        <Route
           path="/updateSkill"
           element={<Protect ComponentName={UpdateSkill} />}
+        ></Route>
+
+<Route
+          path="/updateFreelancerSubCategory"
+          element={<Protect ComponentName={UpdateFreelancerSubCategory} />}
         ></Route>
 
         <Route path="/test" element={<Protect ComponentName={Test} />}></Route>
